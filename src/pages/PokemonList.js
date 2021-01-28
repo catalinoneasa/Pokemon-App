@@ -16,7 +16,6 @@ const PokemonList = (props) => {
   };
 
   const Data = () => {
-    console.log(pokemonList);
     if (pokemonList.loading) {
       return <p>Loading...</p>;
     }

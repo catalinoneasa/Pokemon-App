@@ -1,13 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchPokemonDetails } from "../actions/index";
-import _ from "lodash";
 import { Link } from "react-router-dom";
 
 const PokemonCard = ({ name }) => {
   const dispatch = useDispatch();
   const pokemonState = useSelector((state) => state.Pokemon);
-  console.log(pokemonState.data[name]);
+
   React.useEffect(() => {
     dispatch(FetchPokemonDetails(name));
   }, []);
