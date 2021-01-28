@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchPokemonList } from "../actions/index";
+import PokemonCard from "../components/PokemonCard";
 
 const PokemonList = (props) => {
   const dispatch = useDispatch();
@@ -24,11 +25,7 @@ const PokemonList = (props) => {
       return (
         <div className={"list-wrapper"}>
           {pokemonList.data.map((el) => {
-            return (
-              <div className={"pokemon-item"}>
-                <p>{el.name}</p>
-              </div>
-            );
+            return <PokemonCard name={el.name} />;
           })}
         </div>
       );

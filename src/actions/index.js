@@ -6,18 +6,35 @@ export const FetchPokemonList = () => async (dispatch) => {
       type: "POKEMON_LIST_LOADING",
     });
 
-    const res = await axios.get(
-      "https://pokeapi.co/api/v2/generation/1/?limit=20",
-    );
+    const res = await axios.get("https://pokeapi.co/api/v2/generation/1/");
 
     dispatch({
       type: "POKEMON_LIST_SUCCESS",
       payload: res.data,
     });
-    console.log("Api  result====> " + JSON.stringify(res.data));
   } catch (e) {
     dispatch({
       type: "POKEMON_LIST_FAIL",
+    });
+  }
+};
+
+export const FetchPokemonDetails = (name) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "POKEMON_DETAILS_LOADING",
+    });
+
+    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+
+    dispatch({
+      type: "POKEMON_DETAILS_SUCCESS",
+      payload: res.data,
+      name: name,
+    });
+  } catch (e) {
+    dispatch({
+      type: "POKEMON_DETAILS_FAIL",
     });
   }
 };
