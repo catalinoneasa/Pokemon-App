@@ -7,8 +7,6 @@ const PokemonDetail = (props) => {
   const dispatch = useDispatch();
   const pokemonState = useSelector((state) => state.Pokemon);
 
-  console.log(pokemonState);
-
   const Data = () => {
     if (pokemonState.data[pokemonName] !== undefined) {
       const pokemonData = pokemonState.data[pokemonName];
