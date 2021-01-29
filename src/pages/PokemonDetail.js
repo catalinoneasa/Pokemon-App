@@ -12,33 +12,34 @@ const PokemonDetail = (props) => {
       const pokemonData = pokemonState.data[pokemonName];
 
       return (
-        <div className={"pokemon-wrapper"}>
-          <div className="item">
-            <h1>Sprites</h1>
+        <div>
+          <div className="pokemon-details__images">
             <img src={pokemonData.sprites.front_default} />
-            <img src={pokemonData.sprites.front_shiny} />
             <img src={pokemonData.sprites.front_female} />
-            <img src={pokemonData.sprites.front_shiny_female} />
             <img src={pokemonData.sprites.back_default} />
-            <img src={pokemonData.sprites.back_shiny} />
             <img src={pokemonData.sprites.back_female} />
-            <img src={pokemonData.sprites.back_shiny_female} />
           </div>
-          <div className="item">
-            <h1>Types</h1>
-            {pokemonData.types.map((el) => {
-              return <p>{el.type.name}</p>;
-            })}
-          </div>
-          <div className="item">
-            <h1>Stats</h1>
-            {pokemonData.stats.map((el) => {
-              return (
-                <p>
-                  {el.stat.name} : {el.base_stat}
-                </p>
-              );
-            })}
+          <div className="pokemon-details__description">
+            <h2>{pokemonName} </h2>
+            <div className="pokemon-details__type">
+              {pokemonData.types.map((el) => {
+                return <p className={el.type.name}>{el.type.name}</p>;
+              })}
+            </div>
+            <div className="pokemon-details__stats">
+              <ul>
+                {pokemonData.stats.map((el) => {
+                  return (
+                    <li>
+                      {el.stat.name} : {el.base_stat}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="pokemon-details_home-link">
+              <Link to="/">Home </Link>
+            </div>
           </div>
         </div>
       );
@@ -55,10 +56,10 @@ const PokemonDetail = (props) => {
     return <p>error getting pokemon</p>;
   };
   return (
-    <div>
-      <h1>{pokemonName} </h1>
+    <div
+      className={`pokemon-details ${pokemonState.data[pokemonName].types[0].type.name}`}
+    >
       {Data()}
-      <Link to="/">Home </Link>
     </div>
   );
 };

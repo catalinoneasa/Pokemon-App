@@ -7,7 +7,7 @@ import "./css/main.css";
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <BrowserRouter>
         <div>
           <Route path="/" exact component={PokemonList} />

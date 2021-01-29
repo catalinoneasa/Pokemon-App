@@ -15,32 +15,22 @@ const PokemonCard = ({ name }) => {
     if (pokemonState.data[name] !== undefined) {
       const pokeData = pokemonState.data[name];
       return (
-        <div className={"pokemon-wrapper"}>
-          <div className={"item"}>
-            <img src={pokeData.sprites.front_default} alt="pokemon-image" />
+        <div className={`pokemon-wrapper ${pokeData.types[0].type.name}`}>
+          <div className={"pokemon-card"}>
+            <div className="pokemon-card__image">
+              <img src={pokeData.sprites.front_default} alt="pokemon-image" />
+            </div>
+            <h2>{name}</h2>
           </div>
         </div>
       );
     }
 
-    if (pokemonState.loading) {
-      return <p>Gonna Catch 'Em All...</p>;
-    }
-
     if (pokemonState.errorMsg !== "") {
       return <p>{pokemonState.errorMsg}</p>;
     }
-
-    return <p>Sorry, Can't catch them all</p>;
   };
-  return (
-    <Link to={`/pokemon/${name}`}>
-      <div className={"pokemon-card"}>
-        <h1>{name}</h1>
-        {Data()}
-      </div>
-    </Link>
-  );
+  return <Link to={`/pokemon/${name}`}>{Data()}</Link>;
 };
 
 export default PokemonCard;

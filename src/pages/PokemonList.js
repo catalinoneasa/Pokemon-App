@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FetchPokemonList } from "../actions/index";
 import PokemonCard from "../components/PokemonCard";
 import { useState } from "react";
+import logo from "../assets/logo.png";
 
 const PokemonList = (props) => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const PokemonList = (props) => {
 
   const Data = () => {
     if (pokemonList.loading) {
-      return <p>Loading...</p>;
+      return <div class="pokemon"></div>;
     }
 
     if (pokemonList.data.length > 0) {
@@ -50,14 +51,21 @@ const PokemonList = (props) => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search Pokemon"
-        onChange={(e) => {
-          setsearchTerm(e.target.value);
-        }}
-      />
+    <div className="pokemon-list__content">
+      <div className="header">
+        <div className="logo">
+          <img src={logo} />
+        </div>
+        <div className="input-wrapper">
+          <input
+            type="text"
+            placeholder="Search Pokemon by Name..."
+            onChange={(e) => {
+              setsearchTerm(e.target.value);
+            }}
+          />
+        </div>
+      </div>
       {Data()}
     </div>
   );
