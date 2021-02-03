@@ -11,16 +11,15 @@ const PokemonList = (props) => {
   const [searchTerm, setsearchTerm] = useState("");
 
   React.useEffect(() => {
+    const FetchData = () => {
+      dispatch(FetchPokemonList());
+    };
     FetchData();
   }, []);
 
-  const FetchData = () => {
-    dispatch(FetchPokemonList());
-  };
-
   const Data = () => {
     if (pokemonList.loading) {
-      return <div class="pokemon"></div>;
+      return <div className="pokemon"></div>;
     }
 
     if (pokemonList.data.length > 0) {
@@ -35,9 +34,10 @@ const PokemonList = (props) => {
               ) {
                 return el;
               }
+              return null;
             })
             .map((el) => {
-              return <PokemonCard name={el.name} />;
+              return <PokemonCard key={el.name} name={el.name} />;
             })}
         </div>
       );
@@ -47,14 +47,14 @@ const PokemonList = (props) => {
       return <p>{pokemonList.errorMsg}</p>;
     }
 
-    return <p>unable to get data</p>;
+    return <p>Unable to get data</p>;
   };
 
   return (
     <div className="pokemon-list__content">
       <div className="header">
         <div className="logo">
-          <img src={logo} />
+          <img src={logo} alt="Pokebook logo" />
         </div>
         <div className="input-wrapper">
           <input

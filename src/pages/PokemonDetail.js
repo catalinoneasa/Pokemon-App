@@ -1,36 +1,52 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const PokemonDetail = (props) => {
   const pokemonName = props.match.params.pokemonName;
-  const dispatch = useDispatch();
   const pokemonState = useSelector((state) => state.Pokemon);
 
   const Data = () => {
     if (pokemonState.data[pokemonName] !== undefined) {
       const pokemonData = pokemonState.data[pokemonName];
+      const frontDefault = pokemonData.sprites.front_default;
+      const frontFemale = pokemonData.sprites.front_female;
+      const backDefault = pokemonData.sprites.back_default;
+      const backFemale = pokemonData.sprites.back_female;
 
       return (
         <div>
           <div className="pokemon-details__images">
-            <img src={pokemonData.sprites.front_default} />
-            <img src={pokemonData.sprites.front_female} />
-            <img src={pokemonData.sprites.back_default} />
-            <img src={pokemonData.sprites.back_female} />
+            {frontDefault ? (
+              <img src={frontDefault} alt="pokemon front" />
+            ) : null}
+
+            {frontFemale ? (
+              <img src={frontFemale} alt="pokemon female front" />
+            ) : null}
+
+            {backDefault ? <img src={backDefault} alt="pokemon back" /> : null}
+
+            {backFemale ? (
+              <img src={backFemale} alt="pokemon female back " />
+            ) : null}
           </div>
           <div className="pokemon-details__description">
             <h2>{pokemonName} </h2>
             <div className="pokemon-details__type">
               {pokemonData.types.map((el) => {
-                return <p className={el.type.name}>{el.type.name}</p>;
+                return (
+                  <p className={el.type.name} key={el.type.name}>
+                    {el.type.name}
+                  </p>
+                );
               })}
             </div>
             <div className="pokemon-details__stats">
               <ul>
                 {pokemonData.stats.map((el) => {
                   return (
-                    <li>
+                    <li key={el.stat.name}>
                       {el.stat.name} : {el.base_stat}
                     </li>
                   );

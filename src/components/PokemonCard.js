@@ -9,7 +9,7 @@ const PokemonCard = ({ name }) => {
 
   React.useEffect(() => {
     dispatch(FetchPokemonDetails(name));
-  }, []);
+  }, [name]);
 
   const Data = () => {
     if (pokemonState.data[name] !== undefined) {
@@ -18,7 +18,7 @@ const PokemonCard = ({ name }) => {
         <div className={`pokemon-wrapper ${pokeData.types[0].type.name}`}>
           <div className={"pokemon-card"}>
             <div className="pokemon-card__image">
-              <img src={pokeData.sprites.front_default} alt="pokemon-image" />
+              <img src={pokeData.sprites.front_default} alt="pokemon" />
             </div>
             <h2>{name}</h2>
           </div>
