@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchPokemonDetails } from "../actions/index";
+import { fetchPokemonDetails } from "../actions/index";
 import { Link } from "react-router-dom";
 
 const PokemonCard = ({ name }) => {
@@ -8,7 +8,7 @@ const PokemonCard = ({ name }) => {
   const pokemonState = useSelector((state) => state.Pokemon);
 
   React.useEffect(() => {
-    dispatch(FetchPokemonDetails(name));
+    dispatch(fetchPokemonDetails(name));
   }, [name]);
 
   const Data = () => {

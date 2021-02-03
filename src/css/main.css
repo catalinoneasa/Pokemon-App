@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chewy&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
+
+:root {
+  --primary-font-family: "Permanent Marker", cursive;
+  --secondary-font-family: "Playfair Display, serif;";
+}
 
 * {
   margin: 0;
@@ -47,6 +48,7 @@ input:focus {
 input::placeholder {
   color: rgb(255, 255, 255);
   font-size: 15px;
+  font-family: var(--secondary-font-family);
 }
 
 .list-wrapper {
@@ -69,13 +71,6 @@ input::placeholder {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-}
-
-.header h1 {
-  font-size: 60px;
-  font-family: "Permanent Marker", cursive;
-  color: #3c3d3c;
-  letter-spacing: 3px;
 }
 
 .header span {
@@ -118,7 +113,7 @@ input::placeholder {
 }
 
 h2 {
-  font-family: "Permanent Marker", cursive;
+  font-family: var(--primary-font-family);
   font-size: 20px;
   color: rgb(68, 67, 67);
   text-transform: capitalize;
@@ -154,7 +149,7 @@ h2 {
 
 .pokemon-details__description h2 {
   margin: 0;
-  font-family: "Playfair Display", serif;
+  font-family: var(--secondary-font-family);
   font-size: 70px;
   color: rgb(44, 44, 44);
 }
@@ -170,6 +165,7 @@ h2 {
   padding: 3px 15px;
   border-radius: 10px;
   font-size: 17px;
+  font-family: var(--secondary-font-family);
   color: #fff;
 }
 
@@ -180,7 +176,7 @@ h2 {
 
 .pokemon-details__stats li {
   text-transform: capitalize;
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--secondary-font-family);
   list-style: none;
   color: rgb(44, 44, 44);
 }
@@ -192,7 +188,7 @@ h2 {
 .pokemon-details_home-link a {
   text-decoration: none;
   color: rgb(110, 110, 110);
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--secondary-font-family);
   transition: all 0.3s ease;
 }
 

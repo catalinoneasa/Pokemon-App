@@ -13,7 +13,7 @@ const PokemonDetailsReducer = (state = DefaultState, action) => {
         ...state,
         loading: false,
         errorMsg: "",
-        data: { ...state.data, [action.name]: action.payload },
+        data: { ...state.data, [action.payload.name]: action.payload },
       };
     case "POKEMON_DETAILS_FAIL":
       return { ...state, loading: false, errorMsg: "No Pokemon Found" };

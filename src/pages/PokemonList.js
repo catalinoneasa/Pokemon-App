@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchPokemonList } from "../actions/index";
+import { fetchPokemonList } from "../actions/index";
 import PokemonCard from "../components/PokemonCard";
+import { DebounceInput } from "react-debounce-input";
 import { useState } from "react";
 import logo from "../assets/logo.png";
 
@@ -12,7 +13,7 @@ const PokemonList = (props) => {
 
   React.useEffect(() => {
     const FetchData = () => {
-      dispatch(FetchPokemonList());
+      dispatch(fetchPokemonList());
     };
     FetchData();
   }, []);
@@ -57,9 +58,10 @@ const PokemonList = (props) => {
           <img src={logo} alt="Pokebook logo" />
         </div>
         <div className="input-wrapper">
-          <input
+          <DebounceInput
             type="text"
-            placeholder="Search Pokemon by Name..."
+            placeholder="Search Pokemon By Name..."
+            debounceTimeout={1000}
             onChange={(e) => {
               setsearchTerm(e.target.value);
             }}

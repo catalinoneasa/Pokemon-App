@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const FetchPokemonList = () => async (dispatch) => {
+export const fetchPokemonList = () => async (dispatch) => {
   try {
     dispatch({
       type: "POKEMON_LIST_LOADING",
@@ -19,7 +19,7 @@ export const FetchPokemonList = () => async (dispatch) => {
   }
 };
 
-export const FetchPokemonDetails = (name) => async (dispatch) => {
+export const fetchPokemonDetails = (name) => async (dispatch) => {
   try {
     dispatch({
       type: "POKEMON_DETAILS_LOADING",
@@ -29,8 +29,12 @@ export const FetchPokemonDetails = (name) => async (dispatch) => {
 
     dispatch({
       type: "POKEMON_DETAILS_SUCCESS",
-      payload: res.data,
-      name: name,
+      payload: {
+        sprites: res.data.sprites,
+        stats: res.data.stats,
+        types: res.data.types,
+        name: name,
+      },
     });
   } catch (e) {
     dispatch({

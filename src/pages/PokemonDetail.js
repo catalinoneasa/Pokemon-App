@@ -7,12 +7,14 @@ const PokemonDetail = (props) => {
   const pokemonState = useSelector((state) => state.Pokemon);
 
   const Data = () => {
-    if (pokemonState.data[pokemonName] !== undefined) {
-      const pokemonData = pokemonState.data[pokemonName];
-      const frontDefault = pokemonData.sprites.front_default;
-      const frontFemale = pokemonData.sprites.front_female;
-      const backDefault = pokemonData.sprites.back_default;
-      const backFemale = pokemonData.sprites.back_female;
+    const pokemon = pokemonState.data[pokemonName];
+    const { sprites, stats, types, name } = pokemon;
+
+    if (pokemon !== undefined) {
+      const frontDefault = sprites.front_default;
+      const frontFemale = sprites.front_female;
+      const backDefault = sprites.back_default;
+      const backFemale = sprites.back_female;
 
       return (
         <div>
@@ -32,9 +34,9 @@ const PokemonDetail = (props) => {
             ) : null}
           </div>
           <div className="pokemon-details__description">
-            <h2>{pokemonName} </h2>
+            <h2>{name} </h2>
             <div className="pokemon-details__type">
-              {pokemonData.types.map((el) => {
+              {types.map((el) => {
                 return (
                   <p className={el.type.name} key={el.type.name}>
                     {el.type.name}
@@ -44,7 +46,7 @@ const PokemonDetail = (props) => {
             </div>
             <div className="pokemon-details__stats">
               <ul>
-                {pokemonData.stats.map((el) => {
+                {stats.map((el) => {
                   return (
                     <li key={el.stat.name}>
                       {el.stat.name} : {el.base_stat}
