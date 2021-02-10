@@ -2,17 +2,27 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonList } from "../actions/index";
 import PokemonCard from "../components/PokemonCard";
-import { DebounceInput } from "react-debounce-input";
 import logo from "../assets/logo.png";
 
 const PokemonList = (props) => {
   const dispatch = useDispatch();
   const pokemonList = useSelector((state) => state.PokemonList);
   const [searchTerm, setsearchTerm] = useState("");
+  const [debouncedTerm, setdebouncedTerm] = useState("");
 
   useEffect(() => {
     dispatch(fetchPokemonList());
   }, []);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setdebouncedTerm(searchTerm);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [searchTerm]);
 
   const Data = () => {
     if (pokemonList.loading) {
@@ -27,16 +37,15 @@ const PokemonList = (props) => {
               if (searchTerm === "") {
                 return el;
               } else if (
-                el.name.toLowerCase().includes(searchTerm.toLowerCase())
+                el.name.toLowerCase().includes(debouncedTerm.toLowerCase())
               ) {
                 return el;
               }
               return null;
             })
             .map((el) => {
-              const urlArray = el.url.split("/");
-              const pokemonId = urlArray[urlArray.length - 2];
-
+              const splitUrl = el.url.split("/");
+              const pokemonId = splitUrl[splitUrl.length - 2];
               return (
                 <PokemonCard
                   key={el.name}
@@ -63,13 +72,10 @@ const PokemonList = (props) => {
           <img src={logo} alt="Pokebook logo" />
         </div>
         <div className="input-wrapper">
-          <DebounceInput
+          <input
             type="text"
             placeholder="Search Pokemon By Name..."
-            debounceTimeout={1000}
-            onChange={(e) => {
-              setsearchTerm(e.target.value);
-            }}
+            onChange={(e) => setsearchTerm(e.target.value)}
           />
         </div>
       </div>

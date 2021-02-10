@@ -16,7 +16,11 @@ const PokemonListReducer = (state = DefaultState, action) => {
         errorMsg: "",
       };
     case "POKEMON_LIST_FAIL":
-      return { ...state, loading: false, errorMsg: "No Pokemon Found" };
+      return {
+        ...state,
+        loading: false,
+        errorMsg: "Error Getting Pokemon List",
+      };
     default:
       return state;
   }

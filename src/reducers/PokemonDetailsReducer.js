@@ -16,7 +16,11 @@ const PokemonDetailsReducer = (state = DefaultState, action) => {
         data: { ...state.data, [action.payload.name]: action.payload },
       };
     case "POKEMON_DETAILS_FAIL":
-      return { ...state, loading: false, errorMsg: "No Pokemon Found" };
+      return {
+        ...state,
+        loading: false,
+        errorMsg: "Error getting Pokemon Details",
+      };
 
     default:
       return state;

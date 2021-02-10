@@ -45,9 +45,10 @@ const PokemonDetail = (props) => {
             <h2>{name} </h2>
             <div className="pokemon-details__type">
               {types.map((el) => {
+                const typeName = el.type.name;
                 return (
-                  <p className={el.type.name} key={el.type.name}>
-                    {el.type.name}
+                  <p className={typeName} key={typeName}>
+                    {typeName}
                   </p>
                 );
               })}
