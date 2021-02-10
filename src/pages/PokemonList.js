@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonList } from "../actions/index";
 import PokemonCard from "../components/PokemonCard";
 import { DebounceInput } from "react-debounce-input";
-import { useState } from "react";
 import logo from "../assets/logo.png";
 
 const PokemonList = (props) => {
@@ -11,11 +10,8 @@ const PokemonList = (props) => {
   const pokemonList = useSelector((state) => state.PokemonList);
   const [searchTerm, setsearchTerm] = useState("");
 
-  React.useEffect(() => {
-    const FetchData = () => {
-      dispatch(fetchPokemonList());
-    };
-    FetchData();
+  useEffect(() => {
+    dispatch(fetchPokemonList());
   }, []);
 
   const Data = () => {
@@ -38,7 +34,16 @@ const PokemonList = (props) => {
               return null;
             })
             .map((el) => {
-              return <PokemonCard key={el.name} name={el.name} />;
+              const urlArray = el.url.split("/");
+              const pokemonId = urlArray[urlArray.length - 2];
+
+              return (
+                <PokemonCard
+                  key={el.name}
+                  name={el.name}
+                  pokemonId={pokemonId}
+                />
+              );
             })}
         </div>
       );

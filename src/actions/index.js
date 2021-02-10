@@ -7,10 +7,9 @@ export const fetchPokemonList = () => async (dispatch) => {
     });
 
     const res = await axios.get("https://pokeapi.co/api/v2/generation/1/");
-
     dispatch({
       type: "POKEMON_LIST_SUCCESS",
-      payload: res.data,
+      payload: res.data.pokemon_species,
     });
   } catch (e) {
     dispatch({
@@ -26,14 +25,24 @@ export const fetchPokemonDetails = (name) => async (dispatch) => {
     });
 
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    const {
+      sprites: { front_default, front_female, back_default, back_female },
+      stats,
+      types,
+    } = res.data;
 
     dispatch({
       type: "POKEMON_DETAILS_SUCCESS",
       payload: {
-        sprites: res.data.sprites,
-        stats: res.data.stats,
-        types: res.data.types,
-        name: name,
+        sprites: {
+          front_default,
+          front_female,
+          back_default,
+          back_female,
+        },
+        stats,
+        types,
+        name,
       },
     });
   } catch (e) {

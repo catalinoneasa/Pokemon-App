@@ -77,24 +77,25 @@ input::placeholder {
   color: #effff0;
 }
 
-.pokemon-wrapper {
+.pokemon-card {
   display: inline-block;
   width: 150px;
   height: 200px;
   margin: 10px;
   padding: 20px;
   background-image: url("../assets/354.jpg");
+  background-color: #48a54c;
   background-size: cover;
   background-blend-mode: screen;
   border-radius: 15px;
   box-shadow: 2px 2px 2px rgb(187, 181, 181);
 }
 
-.pokemon-wrapper:hover {
+.pokemon-card:hover {
   opacity: 0.75;
 }
 
-.pokemon-card {
+.pokemon-card__content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -195,6 +196,10 @@ h2 {
 .pokemon-details_home-link a:hover {
   color: rgb(31, 31, 31);
   border-bottom: 1px solid rgb(63, 63, 63);
+}
+
+.pokemon.details-loading {
+  margin-top: 40vh;
 }
 
 .normal {

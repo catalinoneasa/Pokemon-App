@@ -1,36 +1,44 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPokemonDetails } from "../actions";
 
 const PokemonDetail = (props) => {
   const pokemonName = props.match.params.pokemonName;
   const pokemonState = useSelector((state) => state.Pokemon);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPokemonDetails(pokemonName));
+  }, [pokemonName]);
 
   const Data = () => {
     const pokemon = pokemonState.data[pokemonName];
-    const { sprites, stats, types, name } = pokemon;
-
     if (pokemon !== undefined) {
-      const frontDefault = sprites.front_default;
-      const frontFemale = sprites.front_female;
-      const backDefault = sprites.back_default;
-      const backFemale = sprites.back_female;
+      const {
+        sprites: { front_default, front_female, back_default, back_female },
+        stats,
+        types,
+        name,
+      } = pokemon;
 
       return (
-        <div>
+        <div className={`pokemon-details ${types[0].name}`}>
           <div className="pokemon-details__images">
-            {frontDefault ? (
-              <img src={frontDefault} alt="pokemon front" />
+            {front_default ? (
+              <img src={front_default} alt="pokemon front" />
             ) : null}
 
-            {frontFemale ? (
-              <img src={frontFemale} alt="pokemon female front" />
+            {front_female ? (
+              <img src={front_female} alt="pokemon female front" />
             ) : null}
 
-            {backDefault ? <img src={backDefault} alt="pokemon back" /> : null}
+            {back_default ? (
+              <img src={back_default} alt="pokemon back" />
+            ) : null}
 
-            {backFemale ? (
-              <img src={backFemale} alt="pokemon female back " />
+            {back_female ? (
+              <img src={back_female} alt="pokemon female back " />
             ) : null}
           </div>
           <div className="pokemon-details__description">
@@ -64,22 +72,17 @@ const PokemonDetail = (props) => {
     }
 
     if (pokemonState.loading) {
-      return <p>Loading...</p>;
+      return <div className="pokemon details-loading"></div>;
     }
 
     if (pokemonState.errorMsg !== "") {
       return <p>{pokemonState.errorMsg}</p>;
     }
 
-    return <p>error getting pokemon</p>;
+    return <p>Error Getting Pokemon</p>;
   };
-  return (
-    <div
-      className={`pokemon-details ${pokemonState.data[pokemonName].types[0].type.name}`}
-    >
-      {Data()}
-    </div>
-  );
+
+  return Data();
 };
 
 export default PokemonDetail;

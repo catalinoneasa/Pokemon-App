@@ -12,7 +12,7 @@ const PokemonListReducer = (state = DefaultState, action) => {
       return {
         ...state,
         loading: false,
-        data: action.payload.pokemon_species,
+        data: action.payload,
         errorMsg: "",
       };
     case "POKEMON_LIST_FAIL":
